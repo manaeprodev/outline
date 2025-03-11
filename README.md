@@ -103,3 +103,141 @@ yarn sequelize db:migrate --env test
 # License
 
 Outline is [BSL 1.1 licensed](LICENSE).
+
+
+# Commandes HomeMade pour Azure
+
+# OUTLINE
+az container create --resource-group rg-outline \
+--name outline-app \
+--image outline.azurecr.io/outline:latest \
+--cpu 1 --memory 2 \
+--registry-login-server outline.azurecr.io \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3 \
+--ports 3000 \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--secure-environment-variables POSTGRES_USER=toto POSTGRES_PASSWORD=pass POSTGRES_DB=outline  \
+--ip-address Public \
+--dns-name-label outline-docs \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name storage-data \
+--azure-file-volume-mount-path /var/lib/outline/data
+
+
+# SUBNET OUTLINE
+az container create --resource-group rg-outline \
+--name outline-app \
+--image outline.azurecr.io/outline:latest \
+--cpu 1 --memory 2 \
+--registry-login-server outline.azurecr.io \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3 \
+--ports 3000 \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--secure-environment-variables POSTGRES_USER=toto POSTGRES_PASSWORD=pass POSTGRES_DB=outline  \
+--vnet outline-vnet \
+--subnet outline-subnet \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name storage-data \
+--azure-file-volume-mount-path /var/lib/outline/data
+
+# REDIS
+az container create --resource-group rg-outline \
+--name redis \
+--image outline.azurecr.io/redis-image \
+--ports 6379   \
+--cpu 1 --memory 2   \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3 \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--secure-environment-variables POSTGRES_USER=toto POSTGRES_PASSWORD=pass POSTGRES_DB=outline  \
+--ip-address Public \
+--dns-name-label redis-amaris
+
+# SUBNET REDIS
+az container create --resource-group rg-outline \
+--name redis \
+--image outline.azurecr.io/redis-image \
+--ports 6379   \
+--cpu 1 --memory 2   \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3 \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--vnet outline-vnet \
+--subnet outline-subnet \
+--ip-address Public \
+--dns-name-label redis-amaris
+
+# POSTGRES
+az container create --resource-group rg-outline \
+--name postgres   \
+--image outline.azurecr.io/postgres-image  \
+--cpu 1 --memory 2  \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3  \
+--ports 5432  \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--secure-environment-variables POSTGRES_USER=toto POSTGRES_PASSWORD=pass POSTGRES_DB=outline  \
+--ip-address Public \
+--dns-name-label postgres-amaris \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name database-data \
+--azure-file-volume-mount-path /var/lib/postgresql/data
+
+# SUBNET POSTGRES
+az container create --resource-group rg-outline \
+--name postgres   \
+--image outline.azurecr.io/postgres-image  \
+--cpu 1 --memory 2  \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3  \
+--ports 5432  \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--secure-environment-variables POSTGRES_USER=toto POSTGRES_PASSWORD=pass POSTGRES_DB=outline  \
+--vnet outline-vnet \
+--subnet outline-subnet \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name database-data \
+--azure-file-volume-mount-path /var/lib/postgresql/data \
+--ip-address Public \
+--dns-name-label postgres-amaris
+
+# HTTPS PORTAL
+az container create   --resource-group rg-outline \
+--name https-portal-container   \
+--image outline.azurecr.io/https-portal   \
+--cpu 1 --memory 1   \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3  \
+--ports 80 443   \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name https-portal-data \
+--azure-file-volume-mount-path /var/lib/https-portal \
+--ip-address Public \
+--dns-name-label https-portal-amaris
+
+# SUBNET HTTPS PORTAL
+az container create   --resource-group rg-outline \
+--name https-portal-container   \
+--image outline.azurecr.io/https-portal   \
+--cpu 1 --memory 1   \
+--registry-login-server outline.azurecr.io   \
+--registry-username outline   --registry-password sosVg1QIP6ST4TuLo5EcKNdB1Q6FVexjLQoejz37eM+ACRDZSCO3  \
+--ports 80 443   \
+--environment-variables NODE_ENV=production SECRET_KEY=GuYLolhq5GkLUf1hD0fD/lu5H5J+HMl4RjAdZAfhCBw= UTILS_SECRET=EhU+t9VD2wJ0EhJMlb2QsmO8KaFkHfQGtsneW1eeqQU= FORCE_HTTPS=true URL=http://localhost:3000 BASE_URL=http://localhost:3000 DATABASE_URL=postgres://toto:pass@/localhost:5432/outline-db?sslmode=disable REDIS_URL=redis://localhost:6379 PORT=3000 FILE_STORAGE=local AWS_ACCESS_KEY_ID=get_a_key_from_aws AWS_SECRET_ACCESS_KEY=get_the_secret_of_above_key AWS_REGION=xx-xxxx-x AWS_S3_ACCELERATE_URL= AWS_S3_UPLOAD_BUCKET_URL=http://s3:4569 AWS_S3_UPLOAD_BUCKET_NAME=bucket_name_here AWS_S3_FORCE_PATH_STYLE=true AWS_S3_ACL=private COLLABORATION_URL= AZURE_CLIENT_ID=343006cd-1653-4766-94bc-da56ef3a6ea4 AZURE_CLIENT_SECRET=iv08Q~AYYtsyTMKobTAHrPQbNtXbM.wUsOF94b9s AZURE_RESOURCE_APP_ID=00000003-0000-0000-c000-000000000000 \
+--azure-file-volume-account-name outline2025 \
+--azure-file-volume-account-key 0rzqbZjvSjfX+4SpBKxwDo9qIceelE2/oYNRlMq5aWDVOvvx8m6SfCVL62PyGn44eESrM9HHPIpR+AStSXB6dw== \
+--azure-file-volume-share-name https-portal-data \
+--azure-file-volume-mount-path /var/lib/https-portal \
+--vnet outline-vnet \
+--subnet outline-subnet \
+--ip-address Public \
+--dns-name-label https-portal-amaris
+
+# Pour convertir les variables S3 en Azure : 
+https://github.com/gaul/s3proxy

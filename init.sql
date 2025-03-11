@@ -1,0 +1,1 @@
+ALTER USER toto CREATEDB;
